@@ -79,6 +79,22 @@ public class Student {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Date getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(Date updatedOn) {
+        this.updatedOn = updatedOn;
+    }
     // alter table student add foreign key constraint card references Card(id)
 
 

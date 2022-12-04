@@ -83,6 +83,14 @@ public class Book {
         return available;
     }
 
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     public void setAvailable(boolean available) {
         this.available = available;
     }
@@ -92,12 +100,24 @@ public class Book {
         this.genre = genre;
         this.available = available;
     }
-    public Book(String name, Genre genre,Author author, Card card, boolean available) {
+
+    public Book(int id, String name, Genre genre, Author author, Card card, boolean available) {
+        this.id = id;
         this.name = name;
         this.genre = genre;
-        this.author=author;
-        this.card=card;
+        this.author.setId(author.getId());
+        this.card.setId(card.getId());
         this.available = available;
+    }
+
+    public Book(int id, String name, Genre genre, Author author, Card card, boolean available, List<Transaction> transactions) {
+        this.id = id;
+        this.name = name;
+        this.genre = genre;
+        this.author = author;
+        this.card = card;
+        this.available = available;
+        this.transactions = transactions;
     }
 }
 
