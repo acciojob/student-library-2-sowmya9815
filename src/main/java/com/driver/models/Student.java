@@ -24,7 +24,63 @@ public class Student {
     public Student() {
     }
 
+    public Student(String emailId, String name, int age, String country, Card card) {
+        this.emailId = emailId;
+        this.name = name;
+        this.age = age;
+        this.country = country;
+        this.card = card;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
     // alter table student add foreign key constraint card references Card(id)
+
 
     @OneToOne
     @JoinColumn   // join this column to the primary key of Card table
