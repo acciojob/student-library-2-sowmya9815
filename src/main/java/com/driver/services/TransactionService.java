@@ -45,25 +45,24 @@ public class TransactionService {
         //conditions required for successful transaction of issue book:
         //1. book is present and available
         // If it fails: throw new Exception("Book is either unavailable or not present");
-        if(book==null || !book.isAvailable()) {
-            throw new Exception("Book is either unavailable or not present");
-        }
-        //2. card is present and activated
-        // If it fails: throw new Exception("Card is invalid");
-        else if(card==null || card.getCardStatus().equals(CardStatus.DEACTIVATED)) {
+        if(card==null || card.getCardStatus().equals(CardStatus.DEACTIVATED)) {
             throw new Exception("Card is invalid");
         }
 
-        // If it fails: throw new Exception("Book limit has reached for this card");
-        else if( card.getBooks().size() >= max_allowed_books ) {
-            throw new Exception("Book limit has reached for this card");
-        }
+            if (card.getBooks().size() >= max_allowed_books) {
+                throw new Exception("Book limit has reached for this card");
+            }
+            if (book == null || !book.isAvailable()) {
+                throw new Exception("Book is either unavailable or not present");
+            }
+            //2. card is present and activated
+            // If it fails: throw new Exception("Card is invalid");
 
 
+            // If it fails: throw new Exception("Book limit has reached for this card");
 
 
-        //3. number of books issued against the card is strictly less than max_allowed_books
-    else {
+            //3. number of books issued against the card is strictly less than max_allowed_books
             book.setCard(card);
             card.getBooks().add(book);
             //If the transaction is successful, save the transaction to the list of transactions and return the id
@@ -72,7 +71,6 @@ public class TransactionService {
                     .transactionStatus(TransactionStatus.SUCCESSFUL)
                     .book(book)
                     .card(card)
-                    .transactionId(UUID.randomUUID().toString())
                     .isIssueOperation(true)
                     .build();
 
@@ -85,7 +83,7 @@ public class TransactionService {
                 book.getTransactions().add(transaction);
             }
 
-            transactionRepository5.save(transaction); // saving it in the database table;
+//            transactionRepository5.save(transaction); // saving it in the database table;
             //transactionRepository5.save(null);
 
             bookRepository5.save(book);// saving the book details as occupiet or available=false
@@ -97,11 +95,13 @@ public class TransactionService {
             cardRepository5.save(card);
 
 
+
             //Note that the error message should match exactly in all cases
 
             //return null;
             return transaction.getTransactionId();//return transactionId instead
-        }
+
+
     }
 
 
