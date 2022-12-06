@@ -1,6 +1,7 @@
 package com.driver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,11 +9,18 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@Data
+@Builder
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+
 
     @Column(unique = true)
     private String emailId;
@@ -21,94 +29,16 @@ public class Student {
 
     private String country;
 
+
+
     public Student() {
     }
-
-    // alter table student add foreign key constraint card references Card(id)
-
-    @OneToOne
-    @JoinColumn   // join this column to the primary key of Card table
-    @JsonIgnoreProperties("student")
-    private Card card;
-
 
     @CreationTimestamp
     private Date createdOn;
 
     @UpdateTimestamp
     private Date updatedOn;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
-    public Date getCreatedOn() {
-        return createdOn;
-    }
-
-    public void setCreatedOn(Date createdOn) {
-        this.createdOn = createdOn;
-    }
-
-    public Date getUpdatedOn() {
-        return updatedOn;
-    }
-
-    public void setUpdatedOn(Date updatedOn) {
-        this.updatedOn = updatedOn;
-    }
-
-    public Student(String emailId, String name, int age, String country) {
-        this.emailId = emailId;
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
 
     @Override
     public String toString() {
@@ -123,5 +53,18 @@ public class Student {
                 '}';
     }
 
+    // alter table student add foreign key constraint card references Card(id)
+
+    @OneToOne
+    @JoinColumn   // join this column to the primary key of Card table
+    @JsonIgnoreProperties("student")
+    private Card card;
+
+    public Student(String emailId, String name, int age, String country) {
+        this.emailId = emailId;
+        this.name = name;
+        this.age = age;
+        this.country = country;
+    }
 
 }

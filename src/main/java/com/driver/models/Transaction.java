@@ -1,6 +1,7 @@
 package com.driver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -8,6 +9,13 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
+@Builder
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Transaction {
 
     @Id
@@ -15,16 +23,6 @@ public class Transaction {
     private int id;
 
     private String transactionId = UUID.randomUUID().toString(); // externalId
-
-    @ManyToOne
-    @JoinColumn
-    @JsonIgnoreProperties("books")
-    private Card card;
-
-    @ManyToOne
-    @JoinColumn
-    @JsonIgnoreProperties("transactions")
-    private Book book;
 
     private int fineAmount;
 
@@ -37,77 +35,15 @@ public class Transaction {
     @CreationTimestamp
     private Date transactionDate;
 
-    public Transaction(){
-        this.transactionStatus = TransactionStatus.SUCCESSFUL;
-    }
 
-    public int getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnoreProperties("books")
+    private Card card;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public int getFineAmount() {
-        return fineAmount;
-    }
-
-    public void setFineAmount(int fineAmount) {
-        this.fineAmount = fineAmount;
-    }
-
-    public boolean isIssueOperation() {
-        return isIssueOperation;
-    }
-
-    public void setIssueOperation(boolean issueOperation) {
-        isIssueOperation = issueOperation;
-    }
-
-    public TransactionStatus getTransactionStatus() {
-        return transactionStatus;
-    }
-
-    public void setTransactionStatus(TransactionStatus transactionStatus) {
-        this.transactionStatus = transactionStatus;
-    }
-
-    public Date getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(Date transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
-
-
-
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnoreProperties("transactions")
+    private Book book;
 
 }
-
