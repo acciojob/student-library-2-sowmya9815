@@ -109,24 +109,9 @@ public class Student {
         this.country = country;
     }
 
-    public Student(String emailId, String name, int age, String country, Card card) {
-        this.emailId = emailId;
-        this.name = name;
-        this.age = age;
-        this.country = country;
-        this.card = card;
-    }
 
-    public Student(int id, String emailId, String name, int age, String country, Card card, Date createdOn, Date updatedOn) {
-        this.id = id;
-        this.emailId = emailId;
-        this.name = name;
-        this.age = age;
-        this.country = country;
-        this.card = card;
-        this.createdOn = createdOn;
-        this.updatedOn = updatedOn;
-    }
+
+
 
     @Override
     public String toString() {

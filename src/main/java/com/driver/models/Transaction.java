@@ -105,22 +105,9 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public Transaction(Card card, Book book,int fineAmount) {
-        this.card = card;
-        this.book = book;
-        this.fineAmount=fineAmount;
-    }
 
-    public Transaction(int id, String transactionId, Card card, Book book, int fineAmount, boolean isIssueOperation, TransactionStatus transactionStatus, Date transactionDate) {
-        this.id = id;
-        this.transactionId = transactionId;
-        this.card = card;
-        this.book = book;
-        this.fineAmount = fineAmount;
-        this.isIssueOperation = isIssueOperation;
-        this.transactionStatus = transactionStatus;
-        this.transactionDate = transactionDate;
-    }
+
+
 
 }
 

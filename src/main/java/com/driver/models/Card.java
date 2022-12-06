@@ -84,27 +84,5 @@ public class Card {
         this.books = books;
     }
 
-    public Card(int id, Student student, Date createdOn, Date updatedOn, CardStatus cardStatus) {
-        this.id = id;
-        this.student = student;
-        this.createdOn = createdOn;
-        this.updatedOn = updatedOn;
-        this.cardStatus = cardStatus;
-    }
 
-    public Card(Student student, Date createdOn, Date updatedOn, CardStatus cardStatus) {
-        this.student = student;
-        this.createdOn = createdOn;
-        this.updatedOn = updatedOn;
-        this.cardStatus = cardStatus;
-    }
-
-    public Card(int id, Student student, Date createdOn, Date updatedOn, CardStatus cardStatus, List<Book> books) {
-        this.id = id;
-        this.student = student;
-        this.createdOn = createdOn;
-        this.updatedOn = updatedOn;
-        this.cardStatus = cardStatus;
-        this.books = books;
-    }
 }
