@@ -37,12 +37,10 @@ public class TransactionService {
 
     public String issueBook(int cardId, int bookId) throws Exception {
         //check whether bookId and cardId already exist
-        Optional<Book> book = bookRepository5.findById(bookId);
-        if(book==null){
+        if(!bookRepository5.findById(bookId).isPresent()){
             throw new Exception("Book is either unavailable or not present");
         }
-        Optional<Card> card = cardRepository5.findById(cardId);
-        if(card==null){
+        if(!cardRepository5.findById(cardId).isPresent()){
             throw new Exception("Card is invalid");
         }
         Card card1 = cardRepository5.getOne(cardId);
