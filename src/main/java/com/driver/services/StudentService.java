@@ -16,19 +16,16 @@ public class StudentService {
     StudentRepository studentRepository4;
 
     public Student getDetailsByEmail(String email){
-        Student student = null;
-        student = studentRepository4.findByEmailId(email);
-        return student;
+//        Student student = studentRepository4.findByEmailId(email);
+        return studentRepository4.findByEmailId(email);
     }
 
     public Student getDetailsById(int id){
-        Student student = null;
-        student = studentRepository4.findById(id);
-        return student;
+        return studentRepository4.findById(id);
     }
 
     public void createStudent(Student student){
-        cardService4.createAndReturn(student);
+        student.setCard(cardService4.createAndReturn(student));
         studentRepository4.save(student);
     }
 
