@@ -23,10 +23,10 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query("delete from Student s where s.id =:id")
     void deleteCustom(int id);
 
-    @Query("select * from Student s where s.emailId=email")
+
     Student findByEmailId(String email);
 
-    @Query("select * from Student s where s.id=id")
+
     Student findById(int id);
 
 
