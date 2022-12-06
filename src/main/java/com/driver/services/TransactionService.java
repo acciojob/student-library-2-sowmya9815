@@ -50,12 +50,12 @@ public class TransactionService {
         }
         //2. card is present and activated
         // If it fails: throw new Exception("Card is invalid");
-        if(card==null || card.getCardStatus().equals(CardStatus.DEACTIVATED)) {
+        else if(card==null || card.getCardStatus().equals(CardStatus.DEACTIVATED)) {
             throw new Exception("Card is invalid");
         }
 
         // If it fails: throw new Exception("Book limit has reached for this card");
-        if( card.getBooks().size() >= max_allowed_books ) {
+        else if( card.getBooks().size() >= max_allowed_books ) {
             throw new Exception("Book limit has reached for this card");
         }
 
@@ -63,45 +63,45 @@ public class TransactionService {
 
 
         //3. number of books issued against the card is strictly less than max_allowed_books
+    else {
+            book.setCard(card);
+            card.getBooks().add(book);
+            //If the transaction is successful, save the transaction to the list of transactions and return the id
+            Transaction transaction = Transaction.builder()
+                    .fineAmount(0)
+                    .transactionStatus(TransactionStatus.SUCCESSFUL)
+                    .book(book)
+                    .card(card)
+                    .transactionId(UUID.randomUUID().toString())
+                    .isIssueOperation(true)
+                    .build();
 
-        book.setCard(card);
-        card.getBooks().add(book);
-        //If the transaction is successful, save the transaction to the list of transactions and return the id
-        Transaction transaction = Transaction.builder()
-                .fineAmount(0)
-                .transactionStatus(TransactionStatus.SUCCESSFUL)
-                .book(book)
-                .card(card)
-                .isIssueOperation(true)
-                .build();
+            book.setAvailable(false);
+            if (book.getTransactions() == null) {
+                ArrayList<Transaction> transactions = new ArrayList<>();
+                transactions.add(transaction);
+                book.setTransactions(transactions);
+            } else {
+                book.getTransactions().add(transaction);
+            }
 
-        book.setAvailable(false);
-        if(book.getTransactions() == null) {
-            ArrayList<Transaction> transactions = new ArrayList<>();
-            transactions.add(transaction);
-            book.setTransactions(transactions);
-        }
-        else {
-            book.getTransactions().add(transaction);
-        }
+            transactionRepository5.save(transaction); // saving it in the database table;
+            //transactionRepository5.save(null);
 
-        transactionRepository5.save(transaction); // saving it in the database table;
-//        transactionRepository5.save(null);
-
-//        book.setAvailable(false); // occupying the book
-//        book.setCard(card);// setting the card id for the issued book
-        bookRepository5.save(book);// saving the book details as occupiet or available=false
+            bookRepository5.save(book);// saving the book details as occupiet or available=false
 
 //        // a book has list of transaction, so i am adding the transaction to the list;
 //        book.getTransactions().add(transaction);
 //        card.getBooks().add(book);
 
-        cardRepository5.save(card);
+            cardRepository5.save(card);
 
-        //Note that the error message should match exactly in all cases
 
-        //return null;
-        return transaction.getTransactionId();//return transactionId instead
+            //Note that the error message should match exactly in all cases
+
+            //return null;
+            return transaction.getTransactionId();//return transactionId instead
+        }
     }
 
 
