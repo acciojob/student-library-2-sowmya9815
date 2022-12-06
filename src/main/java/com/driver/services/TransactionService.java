@@ -104,8 +104,8 @@ public class TransactionService {
 
         //Note that the error message should match exactly in all cases
 
-        return null;
-        // return transaction.getTransactionId();//return transactionId instead
+        //return null;
+        return transaction.getTransactionId();//return transactionId instead
     }
 
 
@@ -155,7 +155,7 @@ public class TransactionService {
         b.setCard(null);
         bookRepository5.save(b);
 
-        return null;
-        //  return newTransaction; //return the transaction after updating all details
+        //return null;
+          return newTransaction; //return the transaction after updating all details
     }
 }
