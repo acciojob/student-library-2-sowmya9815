@@ -37,22 +37,22 @@ public class TransactionService {
 
     public String issueBook(int cardId, int bookId) throws Exception {
         //check whether bookId and cardId already exist
-        if(!bookRepository5.findById(bookId).isPresent()){
-            throw new Exception("Book is either unavailable or not present");
-        }
-        if(!cardRepository5.findById(cardId).isPresent()){
-            throw new Exception("Card is invalid");
-        }
-        Card card1 = cardRepository5.getOne(cardId);
-        Book book1 = bookRepository5.getOne(bookId);
-        if(!(card1.getBooks().size()<max_allowed_books)){
-            throw new Exception("Book limit has reached for this card");
-        }
-        Transaction transaction = new Transaction();
-        transactionRepository5.save(transaction);
-        List<Book> b = card1.getBooks();
-        b.add(book1);
-        card1.setBooks(b);
+//        if(!bookRepository5.findById(bookId).isPresent()){
+//            throw new Exception("Book is either unavailable or not present");
+//        }
+//        if(!cardRepository5.findById(cardId).isPresent()){
+//            throw new Exception("Card is invalid");
+//        }
+//        Card card1 = cardRepository5.getOne(cardId);
+//        Book book1 = bookRepository5.getOne(bookId);
+//        if(!(card1.getBooks().size()<max_allowed_books)){
+//            throw new Exception("Book limit has reached for this card");
+//        }
+//        Transaction transaction = new Transaction();
+//        transactionRepository5.save(transaction);
+//        List<Book> b = card1.getBooks();
+//        b.add(book1);
+//        card1.setBooks(b);
 
 
         //conditions required for successful transaction of issue book:
@@ -66,7 +66,7 @@ public class TransactionService {
 
         //Note that the error message should match exactly in all cases
 
-       return transaction.getTransactionId(); //return transactionId instead
+       return null; //return transactionId instead
     }
 
     public Transaction returnBook(int cardId, int bookId) throws Exception{
@@ -77,12 +77,12 @@ public class TransactionService {
         //for the given transaction calculate the fine amount considering the book has been returned exactly when this function is called
         //make the book available for other users
         //make a new transaction for return book which contains the fine amount as well
-        Card card1 = cardRepository5.getOne(cardId);
-        Book book1 = bookRepository5.getOne(bookId);
-        int fine = 0;
+//        Card card1 = cardRepository5.getOne(cardId);
+//        Book book1 = bookRepository5.getOne(bookId);
+//        int fine = 0;
 
         Transaction returnBookTransaction  = null;
-        returnBookTransaction = new Transaction(card1,book1,fine);
+//        returnBookTransaction = new Transaction(card1,book1,fine);
         return returnBookTransaction; //return the transaction after updating all details
     }
 }
