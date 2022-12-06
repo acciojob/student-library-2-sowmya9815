@@ -17,12 +17,14 @@ public class StudentService {
     StudentRepository studentRepository4;
 
     public Student getDetailsByEmail(String email){
-//        Student student = studentRepository4.findByEmailId(email);
-        return studentRepository4.findByEmailId(email);
+        Student student = studentRepository4.findByEmailId(email);
+        return student;
     }
 
     public Student getDetailsById(int id){
-        return studentRepository4.findById(id);
+        Student student = null;
+        student = studentRepository4.findById(id);
+        return student;
     }
 
     public void createStudent(Student student){
