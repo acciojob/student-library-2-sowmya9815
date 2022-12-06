@@ -41,9 +41,15 @@ public class TransactionService {
         //check whether bookId and cardId already exist
         Book book = bookRepository5.findById(bookId).orElse(null); // checking book is present or not using the bookid
         Card card = cardRepository5.findById(cardId).orElse(null); // checking card is present or not for the cardId
+
         //conditions required for successful transaction of issue book:
         //1. book is present and available
         // If it fails: throw new Exception("Book is either unavailable or not present");
+        if(book==null || !book.isAvailable()) {
+            throw new Exception("Book is either unavailable or not present");
+        }
+        //2. card is present and activated
+        // If it fails: throw new Exception("Card is invalid");
         if(card==null || card.getCardStatus().equals(CardStatus.DEACTIVATED)) {
             throw new Exception("Card is invalid");
         }
@@ -53,18 +59,9 @@ public class TransactionService {
             throw new Exception("Book limit has reached for this card");
         }
 
-        if(book==null || !book.isAvailable()) {
-            throw new Exception("Book is either unavailable or not present");
-        }
-        //2. card is present and activated
-        // If it fails: throw new Exception("Card is invalid");
 
-//        if(card!=null) {
-//            String status = String.valueOf(card.getCardStatus());
-//            if(status.equals("DEACTIVATED")) {
-//                throw new Exception("Card is invalid");
-//            }
-//        }
+
+
         //3. number of books issued against the card is strictly less than max_allowed_books
 
         book.setCard(card);
@@ -75,7 +72,6 @@ public class TransactionService {
                 .transactionStatus(TransactionStatus.SUCCESSFUL)
                 .book(book)
                 .card(card)
-                .transactionId(UUID.randomUUID().toString())
                 .isIssueOperation(true)
                 .build();
 
