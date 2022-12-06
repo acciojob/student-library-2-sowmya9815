@@ -85,8 +85,8 @@ public class TransactionService {
             book.getTransactions().add(transaction);
         }
 
-        //transactionRepository5.save(transaction); // saving it in the database table;
-        transactionRepository5.save(null);
+        transactionRepository5.save(transaction); // saving it in the database table;
+//        transactionRepository5.save(null);
 
 //        book.setAvailable(false); // occupying the book
 //        book.setCard(card);// setting the card id for the issued book
